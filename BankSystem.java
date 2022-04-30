@@ -20,7 +20,7 @@ public class BankSystem extends JFrame implements ActionListener, ItemListener {
 	private JMenu mnuFile, mnuEdit, mnuView, mnuOpt, mnuWin, mnuHelp;
 
 	private JMenuItem addNew, printRec, end;				//File Menu Options.
-	private	JMenuItem  transfer, deposit, withdraw, delRec, search, searchName, changePass, manageCard;	//Edit Menu Options.
+	private	JMenuItem  loan, transfer, deposit, withdraw, delRec, search, searchName, changePass, manageCard;	//Edit Menu Options.
 	private	JMenuItem oneByOne, allCustomer, viewTrans;				//View Menu Options.
 	private	JMenuItem change, style, theme;					//Option Menu Options.
 	//private JMenuItem close, closeAll;					//Window Menu Options.
@@ -126,6 +126,10 @@ public class BankSystem extends JFrame implements ActionListener, ItemListener {
 		end.addActionListener (this);
 
 		//MenuItems for EditMenu.
+
+		loan = new JMenuItem("Loan Management");
+		loan.setMnemonic ((int)'F');
+		loan.addActionListener (this);
 		transfer = new JMenuItem("Transfer Fund");
 		transfer.setMnemonic ((int)'F');
 		transfer.addActionListener (this);
@@ -210,6 +214,7 @@ public class BankSystem extends JFrame implements ActionListener, ItemListener {
 		mnuFile.add (end);
 
 		//Edit Menu Items.
+		mnuEdit.add(loan);
 		mnuEdit.add(transfer);
 		mnuEdit.add (deposit);
 		mnuEdit.add (withdraw);
@@ -360,6 +365,16 @@ public class BankSystem extends JFrame implements ActionListener, ItemListener {
 	public void actionPerformed (ActionEvent ae) {
 	
 		Object obj = ae.getSource();
+
+		if (obj == loan) {
+
+			boolean b = openChildWindow ("Loan Management");
+			if (b == false) {
+				LoanManagement lm = new LoanManagement ();
+				desktop.add (lm);
+				lm.show ();
+			}
+		}
 
 		if (obj == transfer) {
 			boolean b = openChildWindow ("Transfer Money");
